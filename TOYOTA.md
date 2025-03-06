@@ -10,7 +10,8 @@ To reduce technical debt with copilot, we will:
 1. Secure
 
 ### Code Documentation
-1. what does this file do? (server.rs)
+1. what does this file do? (server.py)
+1. can you write some docstrings and comments for this file?
 1. what are some ways I could improve this implementation?
 
 or I could get more specific
@@ -18,10 +19,9 @@ or I could get more specific
 1. what are some ways I could optimize this code? (with respect to the threads and memory and time efficiency)
 
 1. what are some things that might potentially go wrong with this implementation?
-
+1. can you suggest fixes for the things that might go wrong?
 similar results to above. proof that there is more than one way to go about tech debt reduction with copilot.
 
-1. can you suggest fixes for the things that might go wrong?
 1. what are some thing I may want to think about to help future-proof this code?
 
 ### Code Translation
