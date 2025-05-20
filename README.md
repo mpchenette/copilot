@@ -33,6 +33,7 @@ Copilot Chat is also where we can really focus on reducing existing tech debt.
 
 Endless possibilities: Brainstorm, Translate, Review, Document, Clarify, Understand, Optimize, Generate, Secure, Code!
 
+
 ### Chat Commands
 Chat commands are a great and easy place to start with Copilot Chat. When in doubt, `/help`!
 
@@ -43,35 +44,38 @@ Chat commands are a great and easy place to start with Copilot Chat. When in dou
    - `dotnet test DotnetApp.Tests/DotnetApp.Tests.csproj`
 1. Ask `@vscode Where can I find the setting to render whitespace?`
 
-### Context
+### Context (MOVE THIS ABOVE THE MODES BELOW THE CHAT SECTION?)
 Context in Copilot Chat works differently than it did for code completions. Other than what is currently visible in your editor, Copilot Chat requires that we explicitly add all relevant files as context before submitting our prompt. The easiest ways of including files as context are to with drag and drop them into the chat window, or using the `#file:<filename>` tag.
 
 1. Show typing a `#` into chat and reading what each tag specifies
 
-### Brainstorm
+### Possibilities
+#### Brainstorm
 1. What the best naming convention to use in my .NET project? What's idiomatic?
 1. Is it better to use a const or a static variable for something I need to be global in my .NET API?
-### Translate
+#### Translate
 1. Can you translate this Java file (`point.java`) into Python?
-### Optimize
+#### Optimize
 1. What can I do to improve my .NET app (`DotnetApp`)? I'm preparing it for a production release and need to make sure it's polished.
-### Review
+#### Review
 1. Do you see any security vulnerabilities in this code (`sql.py`)?
 1. I'm looking to reduce tech debt across my codebase. Is there anything in my .NET app (`DotnetApp`) that I should consider improving or fixing?
-### Understand
+#### Understand
 1. Can you explain what this file is doing (`server.rs`)?
 
-## Copilot Edits
+### Modes
+When to use each mode. https://code.visualstudio.com/docs/copilot/chat/copilot-chat#_chat-mode
+
+#### [Ask mode](https://code.visualstudio.com/docs/copilot/chat/chat-ask-mode)
+
+#### [Edit mode](https://code.visualstudio.com/docs/copilot/chat/copilot-edits)
 For when you want to Copilot Chat to make suggestions inside your files!
 
 Copilot Edits makes sweeping changes across multiple files quick and easy.
 
 1. "Can you add comments and docstrings to all of the files in `#file:ITaskService.cs`, `#file:CsvTaskService.cs` and `#file:InMemoryTaskService.cs`"
 
-## [Agent Mode]()
-
-## When to use each
-- https://code.visualstudio.com/docs/copilot/chat/copilot-chat#_chat-mode
+#### [Agent mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode)
 
 ## [Configuring Copilot / Customizing Copilot](https://code.visualstudio.com/docs/copilot/copilot-customization)
 ### Custom instructions
@@ -104,6 +108,10 @@ Generally speaking, when we work with our own large, complex, unique codebases, 
 
 A fairly reliable prompt to use to test Code Referencing (or trigger a public code block) is:
 - "generate “void fast_inverse_sqrt” in C"
+
+## Other
+
+### Copilot Code Review
 
 <!-- # Extended Demos
 ## SonarQube
