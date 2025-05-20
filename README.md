@@ -1,129 +1,149 @@
-# copilot
-
+# GitHub Copilot
 > [!NOTE]
-> As with any GenAI, Copilot is non-deterministic. As such, results you get from Copilot may differ from what I demonstrate.
+> Last updated 05-MAY-2025
 
-## Install (for VS Code)
-1. Go to Extensions (on Activity Bar)
-1. Search for `Copilot`
-1. Install
-    > You will get both the `Copilot` and `Copilot Chat` extensions installed
-1. Using either the pop-up after install or the "Accounts" icon on the Activity Bar, sign into GitHub
-
-Easy as that!
-
-## Familiarize (for VS Code)
-After install, Copilot is 100% ready to go. Start coding to use Code completions or click the "Chat" icon on the Activity Bar to use Copilot Chat.
-
-That's all!
-
-## Use
-### Code completion <!-- 5 min -->
-<!--
-Hit on:
-- context (file name, existing code, etc.)
-  - maybe mention what is used as context and what is not
-- how to accept suggestions (tab)
-- how to flip through suggestions
-- encourages commenting
-- show generating boiler plate
-  - getters and setters etc.
--->
-
-> [!NOTE]
-> Although I don't always explicitly list it, there is an implied acceptance of Copilot's suggestions at the end of each step below.
-
-
-#### point.py
-1. Navigate to point.py
-    > file name is part of the context Copilot uses!
-
-##### class point
-1. Start a new comment "# create a class..."
-    > If the suggestions are wrong or I don't like them, just keep typing!
-1. Add "# should include getters, setters and a toString method" to your comment
-    > The clearer and more descriptive I am, the more helpful Copilot can be!
-1. Type "class Point:" and hit enter
-    > Copilot draws on all information in our file to build its context, so it can infer what we want based on what we have already commented and coded. Remember, file name is part of context!
-1. Accept all getters, setters and toString
-    > Copilot expedites "boring" coding (repetitive, boilerplate tasks). This gives us more time for the tasks and coding we enjoy.
-1. Start a new comment "# calculate the..." (we're going to create a distance function)
-    > Copilot is, once again, inferring what we might want here based on the context it has.
-
-##### class line
-1. Start a new comment "# create a class..."
-1. Type "class..."
-    > Copilot will use the current context (in this case, the file name, and all comments and code in our current file), to determine how to structure and stylize suggested code. notice how Copilot automatically added getters, setters and a toString method (following the pattern it recognized from above) and it even automatically utilizes the distance method we defined previously.
-
-<!-- ##### from direction to development
-1. write a new comment "unit test function to verify line.length == point.distance"
-1. hit enter and press tab -->
-
-### Copilot Chat <!-- 10 min -->
-<!--
-Hit on:
-- how context differs from Code completions
-  - include how once there are prev messages in a hat, those act as context too
-- How to accept changes from chat
-- /clear and the `+` button
-- history of chats
-- models drop down +  attach files
-- slash commands, and @'s
--->
-#### Generate
-> Copilot works on more than just traditional code. Even with operational tasks and files, Copilot can help.
-
-##### Infra as Code
-1. Navigate to iac.tf
-1. Ask Copilot chat to "write a terraform file that creates a webapp and sql DB in Azure for me"
-    > In Copilot Chat, we have various options for how to accepts suggested code.
-
-<!-- ##### .github/workflows/main.yml
-1. create a file main.yml
-1. ask copilot chat to "write me a starter github actions file" -->
-
-#### Explain
-1. Open server.rs
-1. Ask Copilot Chat what this file is doing <!-- maybe show #file:server.rs here and show just highlighting and open windows -->
-#### Improve
-1. Ask Copilot Chat it if there are any ways we can improve the code <!-- maybe talk here about how being specific in our prompt will help give more accurate, reliable answers. the less vague our ask, the better --> <!-- ex. how could I improve this file? I want to make this code run as efficiently as possible and I want to follow best practices -->
-1. Ask chat how to implement thread pools and accept changes <!-- this is a good time to show the full overwrite, vs copy paste -->
-
-#### Translate
-1. Ask Copilot Chat to turn our rust code into python
-
-#### Brainstorm
-1. Ask Copilot Chat: if I'm looking to create a webserver in python, how should I go about it? should I be creating it from scratch like I'm doing here?
-1. Ask it about the differences between the different frameworks it suggests.
-1. Ask it which to use if I'm looking to run a simple blog server and I don't have much coding experience.
-
-#### Secure
-> Copilot can help identify and mitigate security vulnerabilities
-1. Navigate to sql.py
-1. Ask Copilot Chat to identify any security vulnerabilities it sees
-
-
-#### @, # and / <!-- 5 min -->
-##### \#
-We can use `#` to reference files or selections. Essentially, determine what context to use to answer the question we are asking. Note: #web for web search.
-
-1. Try this in chat: 
-    - what is the latest version of Node.js?
-1. then try this
-    - #web what is the latest version of Node.js?
-
-##### @
-Called "participants". Use if you're looking to ask about a specific topic or domain. Example @docker. Copilot extensions can also provide more chat participants. Personally I don't use it much but it's there!
-
-##### /
-Short hand for common tasks in Copilot. So that I don't have to type out a full paragraph.
-- `/tests` - writes tests
-- `/explain` - explain code
-- `/fix` - fix errors
-
-## FAQ
-1. How does GitHub Copilot Chat differ from ChatGPT?
-    - GitHub Copilot Chat takes into consideration the context of your codebase and workspace, giving you more tailored solutions grounded in the code that you've already written. ChatGPT does not do this.
+This is a repo containing materials that can be used for future Copilot demos.
 
 ## Best Practices
-- https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot
+![image.png](./docs/images/copilot-best-practices.png)
+
+## [Code Completions](https://code.visualstudio.com/docs/copilot/ai-powered-suggestions)
+### Inline suggestions
+World's most intelligent autocomplete!
+
+Copilot understands what your intent is via context, like file name, comment contents, surrounding code and other open files in your workspace.
+
+1. `point.py`
+
+Copilot code completions even promotes best practices while you code as comments are one of the primary ways of prompting it!
+
+You can also interact with Copilot code completions (+ more) inside a file in other ways:
+- Suggestion Selector
+- Completions Panel (Ctrl + Enter)
+- Editor Inline Chat (Cmd + I)
+
+### Next Edit Suggestions
+
+1. `point3D.py`
+
+## [Copilot Chat](https://code.visualstudio.com/docs/copilot/chat/copilot-chat)
+No need to context switch! Everything I need, in my IDE.
+
+Copilot Chat is also where we can really focus on reducing existing tech debt.
+
+Endless possibilities: Brainstorm, Translate, Review, Document, Clarify, Understand, Optimize, Generate, Secure, Code!
+
+### Chat Commands
+Chat commands are a great and easy place to start with Copilot Chat. When in doubt, `/help`!
+
+1. Open `calculator.py` and run `/tests` <!-- (remove floats if they appear) -->
+   - Optionally, run `pytest tests/`
+1. `@workspace /tests for #file:TaskItem.cs`
+   - Make sure the created file is in the `DotnetApp.Tests/Models` directory
+   - `dotnet test DotnetApp.Tests/DotnetApp.Tests.csproj`
+1. Ask `@vscode Where can I find the setting to render whitespace?`
+
+### Context
+Context in Copilot Chat works differently than it did for code completions. Other than what is currently visible in your editor, Copilot Chat requires that we explicitly add all relevant files as context before submitting our prompt. The easiest ways of including files as context are to with drag and drop them into the chat window, or using the `#file:<filename>` tag.
+
+1. Show typing a `#` into chat and reading what each tag specifies
+
+### Brainstorm
+1. What the best naming convention to use in my .NET project? What's idiomatic?
+1. Is it better to use a const or a static variable for something I need to be global in my .NET API?
+### Translate
+1. Can you translate this Java file (`point.java`) into Python?
+### Optimize
+1. What can I do to improve my .NET app (`DotnetApp`)? I'm preparing it for a production release and need to make sure it's polished.
+### Review
+1. Do you see any security vulnerabilities in this code (`sql.py`)?
+1. I'm looking to reduce tech debt across my codebase. Is there anything in my .NET app (`DotnetApp`) that I should consider improving or fixing?
+### Understand
+1. Can you explain what this file is doing (`server.rs`)?
+
+## Copilot Edits
+For when you want to Copilot Chat to make suggestions inside your files!
+
+Copilot Edits makes sweeping changes across multiple files quick and easy.
+
+1. "Can you add comments and docstrings to all of the files in `#file:ITaskService.cs`, `#file:CsvTaskService.cs` and `#file:InMemoryTaskService.cs`"
+
+## [Agent Mode]()
+
+## When to use each
+- https://code.visualstudio.com/docs/copilot/chat/copilot-chat#_chat-mode
+
+## [Configuring Copilot / Customizing Copilot](https://code.visualstudio.com/docs/copilot/copilot-customization)
+### Custom instructions
+Used to set "rules" you want Copilot to follow for all suggestions. A system prompt of sorts.
+
+Lives under `.github/copilot-instructions.md`.
+
+Examples:
+1. Specify packages or frameworks you want Copilot to suggest
+   - "Always write my Python unit tests using `pytest`, not `unittest`."
+1. Specify (older) versions of languages or frameworks to use
+   - "When suggesting .NET code, only suggest code compatible with .NET 8."
+   - Note this will not work for versions beyond the model "cut-off" date.
+1. Repo-wide standards or expectations for all involved developers
+   - "Whenever possible, use recursion."
+
+### Prompt Files
+
+### Public Code Block
+If Public Code Block is enabled, if Copilot generates code that closely matches licensed code in the public domain, the response will be blocked. However, there are ways of helping Copilot avoid suggesting public code.
+
+- Refactor / Reframe your prompt
+- Ask Copilot to break suggested code into different blocks in its response
+- Ask Copilot to only show changed lines of code
+- Ask Copilot to just show pseudocode
+- Ask Copilot to comment out the code it suggests 
+- Break your problem into smaller problems
+
+Generally speaking, when we work with our own large, complex, unique codebases, we won't run into this much. This will mostly come into play when we are starting from scratch or asking Copilot for generic examples. The alternative to the Public Code Block is Code Referencing, where Copilot will show the public code anyway and let you know what type of license applies to the repo it is sourced from.
+
+A fairly reliable prompt to use to test Code Referencing (or trigger a public code block) is:
+- "generate “void fast_inverse_sqrt” in C"
+
+<!-- # Extended Demos
+## SonarQube
+### SonarQube - Setup
+As a prerequisite for this demo, you will need Docker Desktop installed and running.
+1. `docker pull sonarqube:community`
+1. Follow any steps here that you need: https://docs.sonarsource.com/sonarqube-community-build/try-out-sonarqube/
+1. Navigate to http://localhost:9000
+
+### .NET - Setup
+As a prerequisite for this demo, you will need a project set-up already inside of SonarQube.
+
+If not yet installed, be sure you have the SonarScanner .NET Core GLobal Tool
+1. `dotnet tool install --global dotnet-sonarscanner`
+1. `dotnet sonarscanner begin /k:"BofA" /d:sonar.host.url="http://localhost:9000"  /d:sonar.token="sqa_ea0a259ee427f1113d6dc0d0de4f5484ed5d6f62"`
+1. `dotnet build DotnetApp/DotnetApp.csproj`
+1. `dotnet sonarscanner end /d:sonar.token="sqa_ea0a259ee427f1113d6dc0d0de4f5484ed5d6f62"`
+
+### Fixing Sonar Issues
+#### Reliability
+1. In SonarQube it is telling me to "Await RunAsync instead" for line 44 of #file:Program.cs. Can you help me fix this?
+#### Maintainability
+1. In SonarQube it is telling me to "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed" for line 21 of #file:TaskItem.cs. Can you help me fix this?
+
+> Tip: Add a new custom instruction for this: "My team uses SonarQube. Please keep the Cognitive Complexity for all suggested code under 15. In other words, the functions that you suggest need to be very clear and brief in what they do, from a program logic standpoint. Break long, complex functions up into smaller components."
+
+### Code Coverage
+1. `dotnet clean DotnetApp/DotnetApp.csproj && dotnet build DotnetApp/DotnetApp.csproj`
+1. ``` sh
+   dotnet sonarscanner begin /k:"BofA" \
+     /d:sonar.host.url="http://localhost:9000" \
+     /d:sonar.token="sqa_ea0a259ee427f1113d6dc0d0de4f5484ed5d6f62" \
+     /d:sonar.cs.cobertura.reportsPaths="DotnetApp.Tests/TestResults/**/coverage.cobertura.xml" \
+     /d:sonar.coverage.exclusions="**Test*.cs,**/*.Tests.cs" \
+     /d:sonar.cs.opencover.reportsPaths="DotnetApp.Tests/TestResults/**/coverage.opencover.xml"
+   ```
+1. `dotnet build DotnetApp/DotnetApp.csproj`
+1. `dotnet test DotnetApp.Tests/DotnetApp.Tests.csproj --collect:"XPlat Code Coverage;Format=opencover,cobertura"`
+1. `dotnet sonarscanner end /d:sonar.token="sqa_ea0a259ee427f1113d6dc0d0de4f5484ed5d6f62"`
+
+### Misc.
+- In the future, Agent mode will be able to iterate on the issues in the dashboard (using the URL) for you!
+ -->
