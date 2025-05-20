@@ -44,7 +44,7 @@ Chat commands are a great and easy place to start with Copilot Chat. When in dou
    - `dotnet test DotnetApp.Tests/DotnetApp.Tests.csproj`
 1. Ask `@vscode Where can I find the setting to render whitespace?`
 
-### Context (MOVE THIS ABOVE THE MODES BELOW THE CHAT SECTION?)
+### Context
 Context in Copilot Chat works differently than it did for code completions. Other than what is currently visible in your editor, Copilot Chat requires that we explicitly add all relevant files as context before submitting our prompt. The easiest ways of including files as context are to with drag and drop them into the chat window, or using the `#file:<filename>` tag.
 
 1. Show typing a `#` into chat and reading what each tag specifies
@@ -56,7 +56,7 @@ Context in Copilot Chat works differently than it did for code completions. Othe
 #### Translate
 1. Can you translate this Java file (`point.java`) into Python?
 #### Optimize
-1. What can I do to improve my .NET app (`DotnetApp`)? I'm preparing it for a production release and need to make sure it's polished.
+1. What can I do to improve my .NET app (`DotnetApp`)? I'm preparing it for a production release and need to make sure it's ready.
 #### Review
 1. Do you see any security vulnerabilities in this code (`sql.py`)?
 1. I'm looking to reduce tech debt across my codebase. Is there anything in my .NET app (`DotnetApp`) that I should consider improving or fixing?
