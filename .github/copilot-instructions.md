@@ -1,5 +1,8 @@
 # General
-When refactoring for a decrease in Cognitive Complexity, remove unnecessary logic.
+Whenever possible, use recursion.
+
+# Rust
+Do not suggest using any external packages (i.e., dependencies). All rust code should only use the `std` library.
 
 # Python
 Always write my Python unit tests using `pytest`, not `unittest`.

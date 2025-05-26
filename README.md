@@ -155,3 +155,13 @@ If not yet installed, be sure you have the SonarScanner .NET Core GLobal Tool
 ### Misc.
 - In the future, Agent mode will be able to iterate on the issues in the dashboard (using the URL) for you!
  -->
+
+
+## Future
+In the future, a decent demo might be to use this commit https://github.com/mpchenette/pong/tree/80dcd03e2cd1e7fe39a044c1fc51cb39ea2b5c2f (FFR: this is the duopong right before I add server side color chainging, right after I changed 127.0.0.1 to 0.0.0.0)to demo agent mode and also repo indexing.
+
+If you have the repo indexed remotely, ask the "ask" mode the following: "it would seem that at the moment the background color changing is a client side change only. is that accurate? how would I make this a change that affects everyone/that everyone can see? that is my goal", and look how fast the response is. This is because of indexing! Even without the file open! No context needed because we have the index.
+
+Now jump to agent mode and ask the same thing. see how much longer it takes. but also see that agent mode makes the change for you. And if agent mode fails like it did for me the first time, you can ask it to iterate!
+
+A good example of when to use each mode and pros/cons and also how knowing the different aspects of Copilot leads to a better experience.
