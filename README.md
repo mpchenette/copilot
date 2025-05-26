@@ -165,3 +165,7 @@ If you have the repo indexed remotely, ask the "ask" mode the following: "it wou
 Now jump to agent mode and ask the same thing. see how much longer it takes. but also see that agent mode makes the change for you. And if agent mode fails like it did for me the first time, you can ask it to iterate!
 
 A good example of when to use each mode and pros/cons and also how knowing the different aspects of Copilot leads to a better experience.
+
+Want to find something that is currently in the code or find where something is? Want to understand how the current logic or implementation works? Ask mode with remote index.
+
+Want to debug something or find where an error or bug stems from? Want to implement a change based on how the current logic functions? Agent mode.
