@@ -226,3 +226,5 @@ sonar-project.properties
 .sonarlint/
 .sonarwork/
 reports/
+
+copilot.sln
