@@ -101,7 +101,9 @@ If Public Code Block is enabled, if Copilot generates code that closely matches 
 - Ask Copilot to break suggested code into different blocks in its response
 - Ask Copilot to only show changed lines of code
 - Ask Copilot to just show pseudocode
-- Ask Copilot to comment out the code it suggests 
+- Ask Copilot to show the code it suggests in another language
+- Ask Copilot to comment out the code it suggests
+- Ask Copilot to prepend the code it suggests with something like `##`
 - Break your problem into smaller problems
 
 Generally speaking, when we work with our own large, complex, unique codebases, we won't run into this much. This will mostly come into play when we are starting from scratch or asking Copilot for generic examples. The alternative to the Public Code Block is Code Referencing, where Copilot will show the public code anyway and let you know what type of license applies to the repo it is sourced from.
