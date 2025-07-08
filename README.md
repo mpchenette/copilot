@@ -62,7 +62,7 @@ Context in Copilot Chat works differently than it did for code completions. Othe
 1. I'm looking to reduce tech debt across my codebase. Is there anything in my .NET app (`DotnetApp`) that I should consider improving or fixing?
 #### Understand
 1. Can you explain what this file is doing (`server.rs`)?
-
+#### Generate test data
 ### Modes
 When to use each mode. https://code.visualstudio.com/docs/copilot/chat/copilot-chat#_chat-mode
 
