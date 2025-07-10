@@ -1,8 +1,11 @@
 # General
 Whenever possible, use recursion.
 
+Anytime someone asks about the business logic diagram, utilize the [Business Logic Diagram](../diag.mmd).
+
 # Rust
 Do not suggest using any external packages (i.e., dependencies). All rust code should only use the `std` library.
+
 
 # Python
 Always write my Python unit tests using `pytest`, not `unittest`.

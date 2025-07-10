@@ -63,6 +63,7 @@ Context in Copilot Chat works differently than it did for code completions. Othe
 #### Understand
 1. Can you explain what this file is doing (`server.rs`)?
 #### Generate test data
+#### modernization
 ### Modes
 When to use each mode. https://code.visualstudio.com/docs/copilot/chat/copilot-chat#_chat-mode
 
@@ -112,7 +113,8 @@ A fairly reliable prompt to use to test Code Referencing (or trigger a public co
 - "generate “void fast_inverse_sqrt” in C"
 
 ## Other
-
+### Mermaid Diagram
+### UML Diagram?
 ### Copilot Code Review
 
 <!-- # Extended Demos
