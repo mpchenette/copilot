@@ -65,7 +65,7 @@ Context in Copilot Chat works differently than it did for code completions. Othe
 #### Generate test data
 #### modernization
 ### Modes
-When to use each mode. https://code.visualstudio.com/docs/copilot/chat/copilot-chat#_chat-mode
+When to use each mode. https://code.visualstudio.com/docs/copilot/chat/chat-modes
 
 #### [Ask mode](https://code.visualstudio.com/docs/copilot/chat/chat-ask-mode)
 
