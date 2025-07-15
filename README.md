@@ -1,6 +1,6 @@
 # GitHub Copilot
 > [!NOTE]
-> Last updated 05-MAY-2025
+> Last updated 14-JUL-2025
 
 This is a repo containing materials that can be used for future Copilot demos.
 
@@ -19,7 +19,7 @@ Copilot code completions even promotes best practices while you code as comments
 
 You can also interact with Copilot code completions (+ more) inside a file in other ways:
 - Suggestion Selector
-- Completions Panel (Ctrl + Enter)
+- Completions Panel
 - Editor Inline Chat (Cmd + I)
 
 ### Next Edit Suggestions
@@ -49,6 +49,8 @@ Context in Copilot Chat works differently than it did for code completions. Othe
 
 1. Show typing a `#` into chat and reading what each tag specifies
 
+#### Vision
+
 ### Possibilities
 #### Brainstorm
 1. What the best naming convention to use in my .NET project? What's idiomatic?
@@ -62,8 +64,11 @@ Context in Copilot Chat works differently than it did for code completions. Othe
 1. I'm looking to reduce tech debt across my codebase. Is there anything in my .NET app (`DotnetApp`) that I should consider improving or fixing?
 #### Understand
 1. Can you explain what this file is doing (`server.rs`)?
-#### Generate test data
-#### modernization
+#### Generate
+- Test data
+- Documentation
+- ...
+#### Modernize
 ### Modes
 When to use each mode. https://code.visualstudio.com/docs/copilot/chat/chat-modes
 
@@ -103,9 +108,9 @@ If Public Code Block is enabled, if Copilot generates code that closely matches 
 - Ask Copilot to only show changed lines of code
 - Ask Copilot to just show pseudocode
 - Ask Copilot to show the code it suggests in another language
+- Break your problem into smaller problems
 <!-- - Ask Copilot to comment out the code it suggests
 - Ask Copilot to prepend the code it suggests with something like `##` -->
-- Break your problem into smaller problems
 
 Generally speaking, when we work with our own large, complex, unique codebases, we won't run into this much. This will mostly come into play when we are starting from scratch or asking Copilot for generic examples. The alternative to the Public Code Block is Code Referencing, where Copilot will show the public code anyway and let you know what type of license applies to the repo it is sourced from.
 
