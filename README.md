@@ -83,6 +83,15 @@ Copilot Edits makes sweeping changes across multiple files quick and easy.
 
 #### [Agent mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode)
 
+##### Demo
+- does my dotnetapp already have unit tests?
+  - auto context discovery
+- can you run the existing unit tests to see if they pass?
+  - self-healing
+- can you add additional unit tests for the placeholders you mentioned above?
+
+- @vscode where is the setting to change the number of "iterations" agent mode will perform before asking if I'd like to continue
+
 ## [Configuring Copilot / Customizing Copilot](https://code.visualstudio.com/docs/copilot/copilot-customization)
 ### Custom instructions
 Used to set "rules" you want Copilot to follow for all suggestions. A system prompt of sorts.
