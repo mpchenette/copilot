@@ -4,13 +4,23 @@ First off, ESSP.
 
 ## Key Metrics
 - Developer Happiness
-- Development Speed
+- Dev/Deploy Velocity
 - Code Quality
 
 ## Developer Happiness
 
 ## Development Speed
 What metrics do you track today? How do you track development speed today? We need a baseline from which to compare Copilot. If we don't have one, how will we know if there is improvement?
+
+metric | how good a representation of DS is it? | how easy is it to grab? | how objective is it? | how hard is it to game?
+--- | --- | --- | --- | ---
+PR lead time / time to PR | 8 | 8 | 10 | 7(depends, if it's time to PR merged, hard, if it's time to PR opened, super easy)
+\# of new features merged | 7 | 8 | 7 | 7
+\# of bugs fixed | 5 | 8 | 4 | 7
+time spent / story point | 8 | 4 | 8 | 3
+lines of code written by AI (belongs in CQ?) | 4 | 9* | 10 | 4
+\# of lines of code written / sprint | 5 | 7 | 10 | 3
+
 
 ## Code Quality
 <!-- add hover tooltips to column titles. for how hard is it to game: "how difficult would it be for developers to skew the metric in a way that makes them look favorable with no true change? the harder the better" -->
