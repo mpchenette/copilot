@@ -121,10 +121,11 @@ If Public Code Block is enabled, if Copilot generates code that closely matches 
 <!-- - Ask Copilot to comment out the code it suggests
 - Ask Copilot to prepend the code it suggests with something like `##` -->
 
-Generally speaking, when we work with our own large, complex, unique codebases, we won't run into this much. This will mostly come into play when we are starting from scratch or asking Copilot for generic examples. The alternative to the Public Code Block is Code Referencing, where Copilot will show the public code anyway and let you know what type of license applies to the repo it is sourced from.
+Generally speaking, when we work with our own large, complex, unique codebases, we won't run into this much. This will mostly come into play when we are starting from scratch or asking Copilot for generic examples. Across all of Copilot, only about 1% of suggestions hit a public code block and most of those are new new files or other generic (and non-code!) use cases. The alternative to the Public Code Block is Code Referencing, where Copilot will show the public code anyway and let you know what type of license applies to the repo it is sourced from.
 
 A fairly reliable prompt to use to test Code Referencing (or trigger a public code block) is:
 - "generate “void fast_inverse_sqrt” in C"
+- "can you show me a quick sort algorithm?"
 
 ## Other
 ### Mermaid Diagram
