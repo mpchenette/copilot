@@ -49,6 +49,8 @@ Context in Copilot Chat works differently than it did for code completions. Othe
 
 1. Show typing a `#` into chat and reading what each tag specifies
 
+Best Practice: Only add the minimum context necessary to answer the question you are asking or to solve the problem you have. This will ensure you get the highest quality response possible from Copilot.
+
 #### Vision
 
 ### Possibilities
