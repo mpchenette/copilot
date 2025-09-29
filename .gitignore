@@ -228,3 +228,7 @@ sonar-project.properties
 reports/
 
 copilot.sln
+# Node.js
+node_modules/
+**/node_modules/
+*.log
