@@ -501,5 +501,49 @@ namespace DotnetApp.Models.Tests
             // Status score: 0
             Assert.Equal(10, score);
         }
+
+        [Fact]
+        public void TaskItem_DefaultValues_ShouldBeSetCorrectly()
+        {
+            // Arrange & Act
+            var task = new TaskItem
+            {
+                Title = "Test Task"
+            };
+
+            // Assert
+            Assert.Equal(3, task.Priority);
+            Assert.Equal("pending", task.Status);
+            Assert.False(task.IsCompleted);
+            Assert.Null(task.Description);
+            // CreatedAt should be close to now
+            Assert.True((DateTime.UtcNow - task.CreatedAt).TotalSeconds < 1);
+        }
+
+        [Fact]
+        public void TaskItem_Properties_CanBeSetAndRetrieved()
+        {
+            // Arrange
+            var now = DateTime.UtcNow;
+            var task = new TaskItem
+            {
+                Id = 123,
+                Title = "Test Title",
+                Description = "Test Description",
+                IsCompleted = true,
+                Priority = 2,
+                Status = "completed",
+                CreatedAt = now
+            };
+
+            // Assert
+            Assert.Equal(123, task.Id);
+            Assert.Equal("Test Title", task.Title);
+            Assert.Equal("Test Description", task.Description);
+            Assert.True(task.IsCompleted);
+            Assert.Equal(2, task.Priority);
+            Assert.Equal("completed", task.Status);
+            Assert.Equal(now, task.CreatedAt);
+        }
     }
 }

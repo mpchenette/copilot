@@ -98,5 +98,112 @@ namespace DotnetApp.Tests.Services
 
             Assert.Equal(t1.Id + 1, t2.Id);
         }
+
+        [Fact]
+        public void GetAllTasks_ReturnsMultipleTasks()
+        {
+            var service = new InMemoryTaskService();
+            var task1 = new TaskItem { Title = "Task 1" };
+            var task2 = new TaskItem { Title = "Task 2" };
+            var task3 = new TaskItem { Title = "Task 3" };
+
+            service.CreateTask(task1);
+            service.CreateTask(task2);
+            service.CreateTask(task3);
+
+            var all = service.GetAllTasks().ToList();
+            Assert.Equal(3, all.Count);
+            Assert.Contains(all, t => t.Title == "Task 1");
+            Assert.Contains(all, t => t.Title == "Task 2");
+            Assert.Contains(all, t => t.Title == "Task 3");
+        }
+
+        [Fact]
+        public void UpdateTask_PreservesId()
+        {
+            var service = new InMemoryTaskService();
+            var task = new TaskItem { Title = "Original" };
+            service.CreateTask(task);
+            var originalId = task.Id;
+
+            var updated = new TaskItem { Title = "Updated", Id = 999 };
+            service.UpdateTask(originalId, updated);
+
+            var fetched = service.GetTaskById(originalId);
+            Assert.NotNull(fetched);
+            Assert.Equal(originalId, fetched.Id);
+            Assert.Equal("Updated", fetched.Title);
+        }
+
+        [Fact]
+        public void UpdateTask_UpdatesAllProperties()
+        {
+            var service = new InMemoryTaskService();
+            var task = new TaskItem 
+            { 
+                Title = "Original",
+                Description = "Original Description",
+                Status = "pending",
+                Priority = 3,
+                IsCompleted = false
+            };
+            service.CreateTask(task);
+            var id = task.Id;
+
+            var updated = new TaskItem 
+            { 
+                Title = "Updated Title",
+                Description = "Updated Description",
+                Status = "completed",
+                Priority = 1,
+                IsCompleted = true
+            };
+            service.UpdateTask(id, updated);
+
+            var fetched = service.GetTaskById(id);
+            Assert.NotNull(fetched);
+            Assert.Equal("Updated Title", fetched.Title);
+            Assert.Equal("Updated Description", fetched.Description);
+            Assert.Equal("completed", fetched.Status);
+            Assert.Equal(1, fetched.Priority);
+            Assert.True(fetched.IsCompleted);
+        }
+
+        [Fact]
+        public void DeleteTask_DoesNotAffectOtherTasks()
+        {
+            var service = new InMemoryTaskService();
+            var task1 = new TaskItem { Title = "Task 1" };
+            var task2 = new TaskItem { Title = "Task 2" };
+            var task3 = new TaskItem { Title = "Task 3" };
+
+            service.CreateTask(task1);
+            service.CreateTask(task2);
+            service.CreateTask(task3);
+
+            service.DeleteTask(task2.Id);
+
+            var all = service.GetAllTasks().ToList();
+            Assert.Equal(2, all.Count);
+            Assert.Contains(all, t => t.Title == "Task 1");
+            Assert.DoesNotContain(all, t => t.Title == "Task 2");
+            Assert.Contains(all, t => t.Title == "Task 3");
+        }
+
+        [Fact]
+        public void CreateTask_WithNullDescription_Works()
+        {
+            var service = new InMemoryTaskService();
+            var task = new TaskItem 
+            { 
+                Title = "No Description",
+                Description = null
+            };
+            service.CreateTask(task);
+
+            var fetched = service.GetTaskById(task.Id);
+            Assert.NotNull(fetched);
+            Assert.Null(fetched.Description);
+        }
     }
 }
