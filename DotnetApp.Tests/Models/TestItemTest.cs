@@ -83,7 +83,8 @@ namespace DotnetApp.Models.Tests
             var score = task.CalculateTaskScore();
 
             // Assert
-            Assert.Equal(15, score);
+            // Priority score: 5, Status score: 5*2 + 5 = 15, Total: 20
+            Assert.Equal(20, score);
         }
 
         [Fact]
@@ -144,6 +145,405 @@ namespace DotnetApp.Models.Tests
 
             // Assert
             Assert.Equal(1, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_PriorityOne_NotPending_ShouldReturnBaseScore()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 1,
+                Status = "in-progress",
+                CreatedAt = DateTime.UtcNow.AddDays(-1),
+                IsCompleted = false,
+                Title = "Test Task"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 10 (no +3 because not pending)
+            // Status score: 0 (in-progress, not completed, no long words)
+            Assert.Equal(10, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_PriorityTwo_InProgress_NotCompleted_WithinWeek()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 2,
+                Status = "in-progress",
+                CreatedAt = DateTime.UtcNow.AddDays(-5),
+                IsCompleted = false,
+                Title = "Test Task"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 5 + 2 = 7 (in-progress and not completed but < 7 days)
+            // Status score: 0
+            Assert.Equal(7, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_PriorityThree_DefaultStatus_NotCompleted()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 3,
+                Status = "blocked",
+                CreatedAt = DateTime.UtcNow.AddDays(-1),
+                IsCompleted = false,
+                Title = "Test Task"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 1
+            // Status score: 3 (default case, not completed and priority < 3 is false for priority=3)
+            Assert.Equal(1, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_PriorityTwo_DefaultStatus_NotCompleted()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 2,
+                Status = "cancelled",
+                CreatedAt = DateTime.UtcNow.AddDays(-1),
+                IsCompleted = false,
+                Title = "Test Task"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 5
+            // Status score: 3 (default case, not completed and priority < 3)
+            Assert.Equal(8, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_NegativePriority_ShouldTreatAsLowPriority()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = -1,
+                Status = "pending",
+                CreatedAt = DateTime.UtcNow.AddDays(-1),
+                IsCompleted = false,
+                Title = "Test Task"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority <= 0 gives score of 1
+            Assert.Equal(1, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_OldPendingTask_HighPriority_ShouldDoubleAndAdd()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 1,
+                Status = "pending",
+                CreatedAt = DateTime.UtcNow.AddDays(-20),
+                IsCompleted = false,
+                Title = "Test Task"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 10 + 3 = 13
+            // Status score: 13 * 2 + 5 = 31
+            // Total: 44
+            Assert.Equal(44, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_InProgress_MultipleLongWords()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 3,
+                Status = "in-progress",
+                CreatedAt = DateTime.UtcNow.AddDays(-1),
+                IsCompleted = false,
+                Title = "VeryLongWord AnotherLongWord ThirdLongWordHere"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 1
+            // Status score: 3 (three words > 10 chars)
+            Assert.Equal(4, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_InProgress_Completed_ShouldSubtract()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 1,
+                Status = "in-progress",
+                CreatedAt = DateTime.UtcNow.AddDays(-1),
+                IsCompleted = true,
+                Title = "Test Task"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 10
+            // Status score: -5 (completed in-progress)
+            // Total: max(0, 5) = 5
+            Assert.Equal(5, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_PendingTask_ExactlyFourteenDays()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 2,
+                Status = "pending",
+                CreatedAt = DateTime.UtcNow.AddDays(-14).AddSeconds(1), // Just under 14 days
+                IsCompleted = false,
+                Title = "Test Task"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 5
+            // Status score: 0 (< 14 days, so no doubling)
+            Assert.Equal(5, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_PendingTask_OverFourteenDays()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 2,
+                Status = "pending",
+                CreatedAt = DateTime.UtcNow.AddDays(-15),
+                IsCompleted = false,
+                Title = "Test Task"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 5
+            // Status score: 5*2 + 5 = 15
+            // Total: 20
+            Assert.Equal(20, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_UppercaseStatus_ShouldWork()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 1,
+                Status = "PENDING",
+                CreatedAt = DateTime.UtcNow.AddDays(-1),
+                IsCompleted = false,
+                Title = "Test Task"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Note: Status check in CalculatePriorityScore is case-sensitive (line 42)
+            // So "PENDING" != "pending", priority score is 10, not 13
+            // Status score: 0 (ToLower() in CalculateStatusScore matches, but no old task bonus)
+            Assert.Equal(10, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_MixedCaseStatus_InProgress()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 2,
+                Status = "In-Progress",
+                CreatedAt = DateTime.UtcNow.AddDays(-1),
+                IsCompleted = false,
+                Title = "TestWord"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 5
+            // Status score: 0 (no long words)
+            Assert.Equal(5, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_InProgress_LongWordExactly10Chars()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 3,
+                Status = "in-progress",
+                CreatedAt = DateTime.UtcNow.AddDays(-1),
+                IsCompleted = false,
+                Title = "ExactlyTen Word"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 1
+            // Status score: 0 (word must be > 10, not >= 10)
+            Assert.Equal(1, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_InProgress_LongWordExactly11Chars()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 3,
+                Status = "in-progress",
+                CreatedAt = DateTime.UtcNow.AddDays(-1),
+                IsCompleted = false,
+                Title = "ElevenChars Word"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 1
+            // Status score: 1 (11 > 10)
+            Assert.Equal(2, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_Priority2_InProgress_ExactlySeven_Days()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 2,
+                Status = "in-progress",
+                CreatedAt = DateTime.UtcNow.AddDays(-7).AddSeconds(1), // Just under 7 days
+                IsCompleted = false,
+                Title = "Test Task"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 5 + 2 = 7 (< 7 days, so no +3 bonus)
+            // Status score: 0
+            Assert.Equal(7, score);
+        }
+
+        [Fact]
+        public void CalculateTaskScore_Priority2_InProgress_OverSeven_Days()
+        {
+            // Arrange
+            var task = new TaskItem
+            {
+                Priority = 2,
+                Status = "in-progress",
+                CreatedAt = DateTime.UtcNow.AddDays(-8),
+                IsCompleted = false,
+                Title = "Test Task"
+            };
+
+            // Act
+            var score = task.CalculateTaskScore();
+
+            // Assert
+            // Priority score: 5 + 2 + 3 = 10 (> 7 days)
+            // Status score: 0
+            Assert.Equal(10, score);
+        }
+
+        [Fact]
+        public void TaskItem_DefaultValues_ShouldBeSetCorrectly()
+        {
+            // Arrange & Act
+            var task = new TaskItem
+            {
+                Title = "Test Task"
+            };
+
+            // Assert
+            Assert.Equal(3, task.Priority);
+            Assert.Equal("pending", task.Status);
+            Assert.False(task.IsCompleted);
+            Assert.Null(task.Description);
+            // CreatedAt should be close to now
+            Assert.True((DateTime.UtcNow - task.CreatedAt).TotalSeconds < 1);
+        }
+
+        [Fact]
+        public void TaskItem_Properties_CanBeSetAndRetrieved()
+        {
+            // Arrange
+            var now = DateTime.UtcNow;
+            var task = new TaskItem
+            {
+                Id = 123,
+                Title = "Test Title",
+                Description = "Test Description",
+                IsCompleted = true,
+                Priority = 2,
+                Status = "completed",
+                CreatedAt = now
+            };
+
+            // Assert
+            Assert.Equal(123, task.Id);
+            Assert.Equal("Test Title", task.Title);
+            Assert.Equal("Test Description", task.Description);
+            Assert.True(task.IsCompleted);
+            Assert.Equal(2, task.Priority);
+            Assert.Equal("completed", task.Status);
+            Assert.Equal(now, task.CreatedAt);
         }
     }
 }
