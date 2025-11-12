@@ -1,5 +1,5 @@
 ---
-description: 'Describe what this custom agent does and when to use it.'
+description: 'A codebase deconstruction agent intended to comprehensively capture the logic, architecture and components of a codebase.'
 tools: ['edit', 'search', 'new', 'extensions', 'changes', 'fetch']
 ---
 
