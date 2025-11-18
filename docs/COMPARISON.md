@@ -1,3 +1,0 @@
-# Advantages of Copilot
-
-## 
