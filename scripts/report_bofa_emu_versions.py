@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 import argparse
 import csv
-import os
-import re
 import sys
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
 
