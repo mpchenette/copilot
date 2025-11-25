@@ -1,6 +1,6 @@
 ---
 description: 'Perform janitorial tasks on any codebase including cleanup, simplification, and tech debt remediation.'
-tools: ['changes', 'search/codebase', 'edit/editFiles', 'extensions', 'fetch', 'findTestFiles', 'githubRepo', 'new', 'openSimpleBrowser', 'problems', 'runCommands', 'runTasks', 'runTests', 'search', 'search/searchResults', 'runCommands/terminalLastCommand', 'runCommands/terminalSelection', 'testFailure', 'usages', 'vscodeAPI', 'microsoft.docs.mcp', 'github/*']
+tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'azure-mcp/search', 'github/*', 'agent', 'todo']
 model: Claude Sonnet 4.5 (copilot)
 ---
 # Universal Janitor
