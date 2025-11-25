@@ -6,5 +6,3 @@ Preserve Existing Code: The current codebase is the source of truth and must be 
 Minimal Necessary Changes: When adding a new feature or making a modification, alter the absolute minimum amount of existing code required to implement the change successfully.
 
 Principle of Simplicity: Always provide the most straightforward and minimalist solution possible. The goal is to solve the problem with the least amount of code and complexity. Avoid premature optimization or over-engineering.
-
-Anytime someone asks about the business logic diagram, utilize the [Business Logic Diagram](../diag.mmd).

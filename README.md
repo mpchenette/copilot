@@ -13,7 +13,7 @@ World's most intelligent autocomplete!
 
 Copilot understands what your intent is via context, like file name, comment contents, surrounding code and other open files in your workspace.
 
-1. `point.py`
+1. `calculator.py`
 
 Copilot code completions even promotes best practices while you code as comments are one of the primary ways of prompting it!
 
@@ -24,7 +24,7 @@ You can also interact with Copilot code completions (+ more) inside a file in ot
 
 ### Next Edit Suggestions
 
-1. `point3D.py`
+1. `calculator.py`
 
 ## [Copilot Chat](https://code.visualstudio.com/docs/copilot/chat/copilot-chat)
 No need to context switch! Everything I need, in my IDE.
@@ -65,7 +65,7 @@ Best Practice: Only add the minimum context necessary to answer the question you
 1. Do you see any security vulnerabilities in this code (`sql.py`)?
 1. I'm looking to reduce tech debt across my codebase. Is there anything in my .NET app (`DotnetApp`) that I should consider improving or fixing?
 #### Understand
-1. Can you explain what this file is doing (`server.rs`)?
+1. Can you explain what this file is doing (`sql.py`)?
 #### Generate
 - Test data
 - Documentation
