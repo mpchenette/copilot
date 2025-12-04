@@ -1,0 +1,35 @@
+flowchart TD
+    A[Can the task be broken into smaller tasks?]
+    B[Break the task into smaller tasks]
+    C[Is the task a code review?]
+    D[Copilot code review]
+    E[Is the task a code change?]
+    F[Does the change span more than five to ten files or will Copilot need CLI access?]
+    G[Ask mode]
+    H[Would information or tools outside of VS Code be useful to accomplish this task?]
+    I[Edit mode]
+    %% J[Is this a code change similar to something you or others are likely to make again in the future?]
+    J[Is anyone likely to make a change like this in the future?]
+    K[Create and use a prompt file]
+    L[Agent mode + MCP]
+    M[Agent mode]
+    N[Do you need to supervise this code change?]
+    O[Copilot coding agent]
+
+    A -- Yes --> B
+    B --> A
+    A -- No --> E
+    C -- Yes --> D
+    C -- No --> G
+    %% E -- Yes --> J
+    J -- Yes --> K
+    J -- No --> F
+    K --> F
+    E -- No --> C
+    F-- Yes --> H
+    F-- No --> I
+    H -- Yes --> L
+    H -- No --> M
+    E -- Yes --> N
+    N -- No --> O
+    N -- Yes --> J
