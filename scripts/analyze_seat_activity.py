@@ -8,11 +8,12 @@ of active users. A user is considered active if they have activity within the la
 
 import csv
 import sys
+import argparse
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
-def analyze_seat_activity(csv_path: str) -> dict:
+def analyze_seat_activity(csv_path: str, days: int = 60) -> dict:
     """
     Analyze a seat activity CSV file.
     
@@ -26,8 +27,8 @@ def analyze_seat_activity(csv_path: str) -> dict:
     active_users = 0
     inactive_users = 0
     
-    # Calculate the cutoff date (60 days ago from now)
-    cutoff_date = datetime.now(timezone.utc) - timedelta(days=60)
+    # Calculate the cutoff date (days ago from now)
+    cutoff_date = datetime.now(timezone.utc) - timedelta(days=days)
     
     with open(csv_path, 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
@@ -66,13 +67,12 @@ def analyze_seat_activity(csv_path: str) -> dict:
 
 def main():
     """Main function to run the analysis."""
-    # Default CSV file path
-    script_dir = Path(__file__).parent
-    csv_file = script_dir / 'seat-activity.csv'
-    
-    # Allow custom CSV path as command line argument
-    if len(sys.argv) > 1:
-        csv_file = Path(sys.argv[1])
+    parser = argparse.ArgumentParser(description="Analyze seat activity CSV")
+    parser.add_argument("csv", nargs="?", default=str(Path(__file__).parent / 'seat-activity.csv'), help="Path to CSV file")
+    parser.add_argument("--days", type=int, default=60, help="Activity window in days (default: 60)")
+    args = parser.parse_args()
+
+    csv_file = Path(args.csv)
     
     if not csv_file.exists():
         print(f"Error: CSV file not found at {csv_file}")
@@ -81,10 +81,10 @@ def main():
     print(f"Analyzing: {csv_file.name}")
     print("-" * 60)
     
-    results = analyze_seat_activity(str(csv_file))
+    results = analyze_seat_activity(str(csv_file), days=args.days)
     
     cutoff_date_str = results['cutoff_date'].strftime('%Y-%m-%d')
-    print(f"\nActivity cutoff date: {cutoff_date_str} (60 days ago)")
+    print(f"\nActivity cutoff date: {cutoff_date_str} ({args.days} days ago)")
     print(f"\nTotal Users:      {results['total_users']:,}")
     print(f"Active Users:     {results['active_users']:,} ({results['active_percentage']:.2f}%)")
     print(f"Inactive Users:   {results['inactive_users']:,} ({results['inactive_percentage']:.2f}%)")
