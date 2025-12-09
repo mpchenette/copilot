@@ -8,6 +8,7 @@
     "lint:fix": "eslint \"src/**/*.js\" --fix"
   },
   "devDependencies": {
-    "eslint": "^9.13.0"
+    "@eslint/js": "^9.39.1",
+    "eslint": "^9.39.1"
   }
 }
