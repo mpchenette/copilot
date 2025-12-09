@@ -1,7 +1,13 @@
+import os
 import mysql.connector
 
 def search_user(username):
-    conn = mysql.connector.connect(user='root', password='password', host='localhost', database='users')
+    conn = mysql.connector.connect(
+        user=os.getenv('DB_USER', 'root'),
+        password=os.getenv('DB_PASSWORD'),
+        host=os.getenv('DB_HOST', 'localhost'),
+        database=os.getenv('DB_NAME', 'users')
+    )
     cursor = conn.cursor()
     query = "SELECT * FROM users WHERE username = '" + username + "'"
     
