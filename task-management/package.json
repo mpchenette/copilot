@@ -1,0 +1,15 @@
+{
+  "name": "playwright-mcp-demo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Minimal static site and Playwright tests suitable for MCP server automation",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "serve": "npx http-server ./src -p 5173 -c-"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "http-server": "^14.1.1"
+  }
+}

@@ -1,0 +1,14 @@
+* { box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; padding: 24px; background: #fafafa; }
+header { border-bottom: 1px solid #e5e5e5; margin-bottom: 16px; }
+h1 { margin: 0 0 12px; }
+main { display: grid; gap: 24px; grid-template-columns: 1fr; max-width: 720px; }
+label { display: block; margin: 8px 0 4px; }
+input[type="text"], input[type="password"] { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; }
+button { margin-top: 8px; padding: 8px 12px; border: 1px solid #ccc; background: white; border-radius: 6px; cursor: pointer; }
+.controls { display: flex; gap: 8px; align-items: center; }
+#new-task { flex: 1; }
+#task-list { list-style: none; padding: 0; }
+.task-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.task-text { flex: 1; }
+dialog { border: none; border-radius: 8px; padding: 16px; }

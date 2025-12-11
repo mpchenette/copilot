@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Playwright MCP Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1 data-testid="title">Playwright MCP Demo</h1>
+    </header>
+
+    <main>
+      <section aria-label="Login Form">
+        <form id="login-form">
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" placeholder="Enter username" />
+
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="Enter password" />
+
+          <button id="login-btn" type="submit">Login</button>
+        </form>
+        <p id="login-status" role="status" aria-live="polite"></p>
+      </section>
+
+      <section aria-label="Tasks">
+        <div class="controls">
+          <input id="new-task" type="text" placeholder="Add a task" />
+          <button id="add-task">Add</button>
+          <button id="clear-completed">Clear Completed</button>
+        </div>
+        <ul id="task-list" aria-label="Task List"></ul>
+      </section>
+
+      <section aria-label="Modal">
+        <button id="open-modal">Open Modal</button>
+        <dialog id="demo-modal">
+          <form method="dialog">
+            <p><strong>Demo Modal</strong></p>
+            <p>This is a modal for UI automation.</p>
+            <button id="close-modal">Close</button>
+          </form>
+        </dialog>
+      </section>
+
+      <section aria-label="Admin Link">
+        <p>
+          Admin area:
+          <a id="admin-link" href="/admin">/admin</a>
+        </p>
+        <p class="hint">Log in as admin/admin to gain access.</p>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

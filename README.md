@@ -1,6 +1,6 @@
 # GitHub Copilot
 > [!NOTE]
-> Last updated 05-MAY-2025
+> Last updated 14-JUL-2025
 
 This is a repo containing materials that can be used for future Copilot demos.
 
@@ -19,7 +19,7 @@ Copilot code completions even promotes best practices while you code as comments
 
 You can also interact with Copilot code completions (+ more) inside a file in other ways:
 - Suggestion Selector
-- Completions Panel (Ctrl + Enter)
+- Completions Panel
 - Editor Inline Chat (Cmd + I)
 
 ### Next Edit Suggestions
@@ -44,10 +44,14 @@ Chat commands are a great and easy place to start with Copilot Chat. When in dou
    - `dotnet test DotnetApp.Tests/DotnetApp.Tests.csproj`
 1. Ask `@vscode Where can I find the setting to render whitespace?`
 
-### Context (MOVE THIS ABOVE THE MODES BELOW THE CHAT SECTION?)
+### Context
 Context in Copilot Chat works differently than it did for code completions. Other than what is currently visible in your editor, Copilot Chat requires that we explicitly add all relevant files as context before submitting our prompt. The easiest ways of including files as context are to with drag and drop them into the chat window, or using the `#file:<filename>` tag.
 
 1. Show typing a `#` into chat and reading what each tag specifies
+
+Best Practice: Only add the minimum context necessary to answer the question you are asking or to solve the problem you have. This will ensure you get the highest quality response possible from Copilot.
+
+#### Vision
 
 ### Possibilities
 #### Brainstorm
@@ -56,15 +60,19 @@ Context in Copilot Chat works differently than it did for code completions. Othe
 #### Translate
 1. Can you translate this Java file (`point.java`) into Python?
 #### Optimize
-1. What can I do to improve my .NET app (`DotnetApp`)? I'm preparing it for a production release and need to make sure it's polished.
+1. What can I do to improve my .NET app (`DotnetApp`)? I'm preparing it for a production release and need to make sure it's ready.
 #### Review
 1. Do you see any security vulnerabilities in this code (`sql.py`)?
 1. I'm looking to reduce tech debt across my codebase. Is there anything in my .NET app (`DotnetApp`) that I should consider improving or fixing?
 #### Understand
 1. Can you explain what this file is doing (`server.rs`)?
-
+#### Generate
+- Test data
+- Documentation
+- ...
+#### Modernize
 ### Modes
-When to use each mode. https://code.visualstudio.com/docs/copilot/chat/copilot-chat#_chat-mode
+When to use each mode. https://code.visualstudio.com/docs/copilot/chat/chat-modes
 
 #### [Ask mode](https://code.visualstudio.com/docs/copilot/chat/chat-ask-mode)
 
@@ -76,6 +84,15 @@ Copilot Edits makes sweeping changes across multiple files quick and easy.
 1. "Can you add comments and docstrings to all of the files in `#file:ITaskService.cs`, `#file:CsvTaskService.cs` and `#file:InMemoryTaskService.cs`"
 
 #### [Agent mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode)
+
+##### Demo
+- does my dotnetapp already have unit tests?
+  - auto context discovery
+- can you run the existing unit tests to see if they pass?
+  - self-healing
+- can you add additional unit tests for the placeholders you mentioned above?
+
+- @vscode where is the setting to change the number of "iterations" agent mode will perform before asking if I'd like to continue
 
 ## [Configuring Copilot / Customizing Copilot](https://code.visualstudio.com/docs/copilot/copilot-customization)
 ### Custom instructions
@@ -101,16 +118,20 @@ If Public Code Block is enabled, if Copilot generates code that closely matches 
 - Ask Copilot to break suggested code into different blocks in its response
 - Ask Copilot to only show changed lines of code
 - Ask Copilot to just show pseudocode
-- Ask Copilot to comment out the code it suggests 
+- Ask Copilot to show the code it suggests in another language
 - Break your problem into smaller problems
+<!-- - Ask Copilot to comment out the code it suggests
+- Ask Copilot to prepend the code it suggests with something like `##` -->
 
-Generally speaking, when we work with our own large, complex, unique codebases, we won't run into this much. This will mostly come into play when we are starting from scratch or asking Copilot for generic examples. The alternative to the Public Code Block is Code Referencing, where Copilot will show the public code anyway and let you know what type of license applies to the repo it is sourced from.
+Generally speaking, when we work with our own large, complex, unique codebases, we won't run into this much. This will mostly come into play when we are starting from scratch or asking Copilot for generic examples. Across all of Copilot, only about 1% of suggestions hit a public code block and most of those are new new files or other generic (and non-code!) use cases. The alternative to the Public Code Block is Code Referencing, where Copilot will show the public code anyway and let you know what type of license applies to the repo it is sourced from.
 
 A fairly reliable prompt to use to test Code Referencing (or trigger a public code block) is:
 - "generate “void fast_inverse_sqrt” in C"
+- "can you show me a quick sort algorithm?"
 
 ## Other
-
+### Mermaid Diagram
+### UML Diagram?
 ### Copilot Code Review
 
 <!-- # Extended Demos
@@ -155,3 +176,17 @@ If not yet installed, be sure you have the SonarScanner .NET Core GLobal Tool
 ### Misc.
 - In the future, Agent mode will be able to iterate on the issues in the dashboard (using the URL) for you!
  -->
+
+
+## Future
+In the future, a decent demo might be to use this commit https://github.com/mpchenette/pong/tree/80dcd03e2cd1e7fe39a044c1fc51cb39ea2b5c2f (FFR: this is the duopong right before I add server side color chainging, right after I changed 127.0.0.1 to 0.0.0.0)to demo agent mode and also repo indexing.
+
+If you have the repo indexed remotely, ask the "ask" mode the following: "it would seem that at the moment the background color changing is a client side change only. is that accurate? how would I make this a change that affects everyone/that everyone can see? that is my goal", and look how fast the response is. This is because of indexing! Even without the file open! No context needed because we have the index.
+
+Now jump to agent mode and ask the same thing. see how much longer it takes. but also see that agent mode makes the change for you. And if agent mode fails like it did for me the first time, you can ask it to iterate!
+
+A good example of when to use each mode and pros/cons and also how knowing the different aspects of Copilot leads to a better experience.
+
+Want to find something that is currently in the code or find where something is? Want to understand how the current logic or implementation works? Ask mode with remote index.
+
+Want to debug something or find where an error or bug stems from? Want to implement a change based on how the current logic functions? Agent mode.

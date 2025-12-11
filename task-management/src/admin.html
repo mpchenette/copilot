@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Area</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .denied { color: #b00020; font-weight: 600; }
+      .admin { color: #0a7; font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Admin Area</h1>
+      <nav>
+        <a href="/">Home</a>
+      </nav>
+    </header>
+    <main>
+      <section id="access" aria-label="Access Status">
+        <p id="status" role="status" aria-live="polite"></p>
+      </section>
+      <section id="admin-content" hidden aria-label="Admin Content">
+        <h2>System Controls</h2>
+        <ul>
+          <li>View audit logs</li>
+          <li>Manage users</li>
+          <li>Reset cache</li>
+        </ul>
+      </section>
+    </main>
+    <script>
+      (function() {
+        let role = 'user';
+        try { role = localStorage.getItem('demo-role') || 'user'; } catch {}
+        const status = document.getElementById('status');
+        const content = document.getElementById('admin-content');
+        if (role === 'admin') {
+          status.textContent = 'Access granted: admin';
+          status.className = 'admin';
+          status.dataset.testid = 'admin-access-granted';
+          content.hidden = false;
+        } else {
+          status.textContent = 'Access denied: insufficient permissions';
+          status.className = 'denied';
+          status.dataset.testid = 'admin-access-denied';
+          content.hidden = true;
+        }
+      })();
+    </script>
+  </body>
+</html>
