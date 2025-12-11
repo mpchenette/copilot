@@ -79,6 +79,7 @@ You'll see: **17 passed, 18 failed, 7 skipped**
 - 7 more skipped tests for bonus round (shipping calculation)
 
 ## MCP
+- playwright
 
 ## Test data generation
 - "can you generate test data for this app? In particular I need to popiulate the following files: `tests/fixtures/sample_customers.json`, `tests/fixtures/sample_products.json`, and `tests/fixtures/sample_orders.json`
