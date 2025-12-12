@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Linq;
-using Microsoft.Extensions.FileProviders;
-using DotnetApp.Services;
+﻿using DotnetApp.Services;
 using DotnetApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
