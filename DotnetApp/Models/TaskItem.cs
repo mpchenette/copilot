@@ -20,108 +20,66 @@ namespace DotnetApp.Models
 
         public int CalculateTaskScore()
         {
-            int score = 0;
+            int priorityScore = CalculatePriorityScore();
+            int statusScore = CalculateStatusScore(priorityScore);
 
-            score += CalculatePriorityScore();
-            score += CalculateStatusScore(score);
-
-            return Math.Max(0, score);
+            return Math.Max(0, priorityScore + statusScore);
         }
 
         private int CalculatePriorityScore()
         {
-            int score = 0;
+            if (Priority <= 0) return 1;
+            if (Priority == 1) return CalculateHighPriorityScore();
+            if (Priority == 2) return CalculateMediumPriorityScore();
+            return 1;
+        }
 
-            if (Priority <= 0)
-            {
-                score += 1;
-            }
-            else if (Priority == 1)
-            {
-                score += 10;
-                if (Status == "pending")
-                {
-                    score += 3;
-                }
-            }
-            else if (Priority == 2)
-            {
-                score += 5;
-                if (Status == "in-progress" && !IsCompleted)
-                {
-                    score += 2;
-                    if ((DateTime.UtcNow - CreatedAt).TotalDays > 7)
-                    {
-                        score += 3;
-                    }
-                }
-            }
-            else
-            {
-                score += 1;
-            }
-
+        private int CalculateHighPriorityScore()
+        {
+            int score = 10;
+            if (Status == "pending") score += 3;
             return score;
         }
 
-        private int CalculateStatusScore(int currentScore)
+        private int CalculateMediumPriorityScore()
         {
-            int score = 0;
-
-            switch (Status.ToLower())
+            int score = 5;
+            if (Status == "in-progress" && !IsCompleted)
             {
-                case "pending":
-                    score += CalculatePendingScore(currentScore);
-                    break;
-                case "in-progress":
-                    score += CalculateInProgressScore();
-                    break;
-                default:
-                    if (!IsCompleted && Priority < 3)
-                    {
-                        score += 3;
-                    }
-                    break;
+                score += 2;
+                if ((DateTime.UtcNow - CreatedAt).TotalDays > 7) score += 3;
             }
-
             return score;
         }
 
-        private int CalculatePendingScore(int currentScore)
+        private int CalculateStatusScore(int priorityScore)
         {
-            int score = 0;
-
-            if ((DateTime.UtcNow - CreatedAt).TotalDays > 14)
+            return Status.ToLower() switch
             {
-                score += currentScore * 2;
-                if (Priority < 3)
-                {
-                    score += 5;
-                }
-            }
+                "pending" => CalculatePendingScore(priorityScore),
+                "in-progress" => CalculateInProgressScore(),
+                _ => (!IsCompleted && Priority < 3) ? 3 : 0
+            };
+        }
 
+        private int CalculatePendingScore(int priorityScore)
+        {
+            if ((DateTime.UtcNow - CreatedAt).TotalDays <= 14) return 0;
+            
+            int score = priorityScore * 2;
+            if (Priority < 3) score += 5;
             return score;
         }
 
         private int CalculateInProgressScore()
         {
+            if (IsCompleted) return -5;
+
             int score = 0;
-
-            if (IsCompleted)
+            foreach (var word in Title.Split(' '))
             {
-                score -= 5;
+                if (word.Length > 10) score += 1;
             }
-            else
-            {
-                foreach (var word in Title.Split(' '))
-                {
-                    if (word.Length > 10)
-                    {
-                        score += 1;
-                    }
-                }
-            }
-
             return score;
         }
     }
